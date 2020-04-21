@@ -198,6 +198,9 @@ var utils = {
     types: {
 
         rotation: function(r, currentRotation){
+	    if (r === undefined) {
+              return currentRotation;
+            }
 
             // if number provided, rotate only in Z by that amount
             if (typeof r === 'number') r = {z:r};
@@ -209,6 +212,10 @@ var utils = {
         },
 
         scale: function(s, currentScale){
+	    if (s === undefined) {
+	      return currentScale;
+	    }
+
             if (typeof s === 'number') return s = [s,s,s]; 
             else return this.applyDefault([s.x, s.y, s.z], currentScale);
         },

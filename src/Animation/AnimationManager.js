@@ -79,6 +79,12 @@ AnimationManager.prototype = {
             else {
                 this.stop();
                 options.rotation = utils.radify(options.rotation);
+
+		// Multiply object "world scale" with set scale.
+		let worldScale = obj.worldScale || [1, 1, 1];
+		let setScale = options.scale || { x: 1, y: 1, z: 1 };
+     		options.scale = [worldScale[0] * setScale.x, worldScale[1] * setScale.y, worldScale[2] * setScale.z]; 
+
                 this._setObject(options);
             }
 

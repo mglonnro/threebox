@@ -65,7 +65,9 @@ Objects.prototype = {
 		        // If object already added, scale the model so that its units are interpreted as meters at the given latitude
 				if (obj.userData.units === 'meters'){
 					var s = utils.projectedUnitsPerMeter(lnglat[1]);
-					obj.scale.set(s,s,s);
+					obj.worldScale = [s, s, s];
+					let setScale = obj.setScale || [1.0, 1.0, 1.0];
+					obj.scale.set(s * setScale[0], s * setScale[1], s * setScale[2]);
 				}
 
 				obj.coordinates = lnglat;

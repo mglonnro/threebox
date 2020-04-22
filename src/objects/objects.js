@@ -41,11 +41,11 @@ Objects.prototype = {
 
 	},
 
-	_addMethods: function(obj, static){
+	_addMethods: function(obj, isStatic){
 
 		var root = this;
 
-		if (static) {
+		if (isStatic) {
 
 		}
 
@@ -65,7 +65,9 @@ Objects.prototype = {
 		        // If object already added, scale the model so that its units are interpreted as meters at the given latitude
 				if (obj.userData.units === 'meters'){
 					var s = utils.projectedUnitsPerMeter(lnglat[1]);
-					obj.scale.set(s,s,s);
+					obj.worldScale = [s, s, s];
+					let setScale = obj.setScale || [1.0, 1.0, 1.0];
+					obj.scale.set(s * setScale[0], s * setScale[1], s * setScale[2]);
 				}
 
 				obj.coordinates = lnglat;
@@ -93,7 +95,7 @@ Objects.prototype = {
 
 		obj.add = function(){
 	        root.world.add(obj);
-	        if (!static) obj.set({position:obj.coordinates});
+	        if (!isStatic) obj.set({position:obj.coordinates});
 	        return obj;
 		}
 

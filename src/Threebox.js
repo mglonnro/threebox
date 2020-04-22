@@ -58,7 +58,6 @@ Threebox.prototype = {
         
         this.options = utils._validate(options || {}, defaultOptions);
         if (this.options.defaultLights) this.defaultLights();
-        
     },
 
     // Objects
@@ -144,8 +143,8 @@ Threebox.prototype = {
 
     defaultLights: function(){
 
-        this.scene.add( new THREE.AmbientLight( 0xffffff ) );
-        var sunlight = new THREE.DirectionalLight(0xffffff, 0.25);
+        this.scene.add( new THREE.AmbientLight( 0xffffff, 0.6 ) );
+	var sunlight = new THREE.DirectionalLight( 0xffffff, 0.7 );
         sunlight.position.set(0,80000000,100000000);
         sunlight.matrixWorldNeedsUpdate = true;
         this.world.add(sunlight);
